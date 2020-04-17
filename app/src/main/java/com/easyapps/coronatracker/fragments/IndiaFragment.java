@@ -34,7 +34,6 @@ public class IndiaFragment extends Fragment {
     private TextView confirmed_on, recovered_on, deceased_on;
     private TextView update;
     private RequestQueue mQueue;
-    private CardView state_wise,date_wise,district_wise;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +53,7 @@ public class IndiaFragment extends Fragment {
 
         mQueue = VolleySingleton.getInstance(getContext()).getRequestQueue();
 
-        state_wise=root.findViewById(R.id.card_8);
+        CardView state_wise = root.findViewById(R.id.card_8);
         state_wise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +63,7 @@ public class IndiaFragment extends Fragment {
             }
         });
 
-        date_wise=root.findViewById(R.id.card_9);
+        CardView date_wise = root.findViewById(R.id.card_9);
         date_wise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +73,7 @@ public class IndiaFragment extends Fragment {
             }
         });
 
-        district_wise=root.findViewById(R.id.card_10);
+        CardView district_wise = root.findViewById(R.id.card_10);
         district_wise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -67,8 +67,7 @@ public class StateWiseAdapter extends RecyclerView.Adapter<StateWiseAdapter.Stat
     @Override
     public StateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.state_wise_item, parent, false);
-        StateViewHolder svh = new StateViewHolder(v, mListener);
-        return svh;
+        return new StateViewHolder(v, mListener);
     }
 
     public StateWiseAdapter(StateWiseActivity stateWiseActivity, ArrayList<StateWiseItem> stateList) {

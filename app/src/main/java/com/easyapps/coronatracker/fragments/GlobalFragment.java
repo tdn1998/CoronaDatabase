@@ -19,14 +19,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.easyapps.coronatracker.R;
 import com.easyapps.coronatracker.VolleySingleton;
 import com.easyapps.coronatracker.country_wise.CountryActivity;
-import com.easyapps.coronatracker.state_wise.StateWiseActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.NumberFormat;
-import java.util.Iterator;
 import java.util.Locale;
 
 public class GlobalFragment extends Fragment {
@@ -34,7 +31,6 @@ public class GlobalFragment extends Fragment {
     private TextView confirmed, active, recovered, deceased;
     private TextView update;
     private RequestQueue mQueue;
-    private CardView country_wise;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +47,7 @@ public class GlobalFragment extends Fragment {
         mQueue = VolleySingleton.getInstance(getContext()).getRequestQueue();
         jsonParse();
 
-        country_wise=root.findViewById(R.id.card_5);
+        CardView country_wise = root.findViewById(R.id.card_5);
         country_wise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +97,7 @@ public class GlobalFragment extends Fragment {
             recovered.setText(NumberFormat.getNumberInstance(Locale.US).format(Integer.valueOf(recover_no)));
             deceased.setText(NumberFormat.getNumberInstance(Locale.US).format(Integer.valueOf(death_no)));
 
-            Integer active_no=Integer.valueOf(confirmed_no)-Integer.valueOf(recover_no)-Integer.valueOf(death_no);
+            Integer active_no=Integer.parseInt(confirmed_no)-Integer.parseInt(recover_no)-Integer.parseInt(death_no);
             active.setText(NumberFormat.getNumberInstance(Locale.US).format(active_no));
             update.append(updated);
 

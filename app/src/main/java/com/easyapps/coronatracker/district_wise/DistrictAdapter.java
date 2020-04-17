@@ -67,8 +67,7 @@ public class DistrictAdapter extends RecyclerView.Adapter<DistrictAdapter.Distri
     @Override
     public DistrictViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.district_item, parent, false);
-        DistrictViewHolder svh = new DistrictViewHolder(v, mListener);
-        return svh;
+        return new DistrictViewHolder(v, mListener);
     }
 
     public DistrictAdapter(DistrictActivity stateWiseActivity, ArrayList<DistrictItem> stateList) {

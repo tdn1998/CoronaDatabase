@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class StateWiseActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class StateWiseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_state_wise);
 
-        getSupportActionBar().setTitle("State Wise Data");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("State Wise Data");
 
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);

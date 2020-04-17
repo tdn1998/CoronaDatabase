@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DateWiseActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class DateWiseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_wise);
 
-        getSupportActionBar().setTitle("Date Wise Data");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Date Wise Data");
 
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);

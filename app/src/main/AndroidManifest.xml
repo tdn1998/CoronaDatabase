@@ -16,9 +16,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".country_wise.CountryActivity"></activity>
-        <activity android:name=".district_wise.DistrictActivity" />
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity
+            android:name=".country_wise.CountryActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".district_wise.DistrictActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".state_wise.StateWiseActivity"
             android:parentActivityName=".MainActivity" />

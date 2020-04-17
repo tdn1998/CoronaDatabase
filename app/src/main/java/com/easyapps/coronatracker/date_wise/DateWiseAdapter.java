@@ -67,8 +67,7 @@ public class DateWiseAdapter extends RecyclerView.Adapter<DateWiseAdapter.DateVi
     @Override
     public DateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.date_wise_item, parent, false);
-        DateViewHolder svh = new DateViewHolder(v, mListener);
-        return svh;
+        return new DateViewHolder(v, mListener);
     }
 
     public DateWiseAdapter(DateWiseActivity dateWiseActivity, ArrayList<DateWiseItem> dateList) {

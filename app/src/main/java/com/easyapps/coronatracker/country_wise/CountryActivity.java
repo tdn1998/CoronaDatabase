@@ -1,6 +1,5 @@
 package com.easyapps.coronatracker.country_wise;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class CountryActivity extends AppCompatActivity {
 
@@ -40,7 +40,7 @@ public class CountryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country);
 
-        getSupportActionBar().setTitle("District Wise Data");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Country Wise Data");
 
         /*dialog = new ProgressDialog(CountryActivity.this, R.style.AppCompatAlertDialogStyle);
         dialog.setTitle("Please Wait");

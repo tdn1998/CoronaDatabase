@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class DistrictActivity extends AppCompatActivity {
 
@@ -37,7 +38,7 @@ public class DistrictActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_district);
 
-        getSupportActionBar().setTitle("District Wise Data");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("District Wise Data");
 
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
@@ -62,8 +63,8 @@ public class DistrictActivity extends AppCompatActivity {
 
                             while (keys.hasNext()) {
                                 String key = keys.next(); //state name
-                                String value_all = "";
-                                String key1_all = "";
+                                StringBuilder value_all = new StringBuilder();
+                                StringBuilder key1_all = new StringBuilder();
 
                                 JSONObject district = response.getJSONObject(key).getJSONObject("districtData");
                                 Iterator<String> keys1 = district.keys();
@@ -75,10 +76,10 @@ public class DistrictActivity extends AppCompatActivity {
 
                                     String value = confirmed.getString("confirmed"); //cases confirmed
 
-                                    key1_all = key1_all + "\n" + key1+"\n";
-                                    value_all = value_all + "\n" + value+"\n";
+                                    key1_all.append("\n").append(key1).append("\n");
+                                    value_all.append("\n").append(value).append("\n");
                                 }
-                                districtList.add(new DistrictItem(key, key1_all, value_all));
+                                districtList.add(new DistrictItem(key, key1_all.toString(), value_all.toString()));
                             }
 
                             mAdapter = new DistrictAdapter(DistrictActivity.this, districtList);

@@ -57,7 +57,7 @@
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="30dp" />
+                        android:textSize="30sp" />
 
                 </LinearLayout>
 
@@ -92,7 +92,7 @@
                         android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="30dp" />
+                        android:textSize="30sp" />
 
                 </LinearLayout>
 
@@ -227,7 +227,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_toEndOf="@+id/card_5"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/light_green"
                 app:cardCornerRadius="15dp">
@@ -268,7 +267,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_toEndOf="@+id/card_6"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/light_black"
                 app:cardCornerRadius="15dp">
