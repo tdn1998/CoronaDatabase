@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker.date_wise;
+package com.darkndev.coronatracker.district_wise;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,74 +16,79 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.easyapps.coronatracker.R;
-import com.easyapps.coronatracker.VolleySingleton;
+import com.darkndev.coronatracker.R;
+import com.darkndev.coronatracker.VolleySingleton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
-public class DateWiseActivity extends AppCompatActivity {
+public class DistrictActivity extends AppCompatActivity {
 
     private RequestQueue mQueue;
 
     private RecyclerView mRecyclerView;
-    private DateWiseAdapter mAdapter;
-    private ArrayList<DateWiseItem> stateList;
+    private DistrictAdapter mAdapter;
+    private ArrayList<DistrictItem> districtList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_date_wise);
+        setContentView(R.layout.activity_district);
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Date Wise Data");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("District Wise Data");
 
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        stateList = new ArrayList<>();
+        districtList = new ArrayList<>();
 
         mQueue = VolleySingleton.getInstance(this).getRequestQueue();
         jsonParse();
     }
 
     private void jsonParse() {
-        String url = "https://api.covid19india.org/data.json";
+        String url = "https://api.covid19india.org/state_district_wise.json";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
                         try {
-                            JSONArray jsonArray = response.getJSONArray("cases_time_series");
-                            for (int i = jsonArray.length()-1; i >= 0; i--) {
-                                JSONObject cases = jsonArray.getJSONObject(i);
+                            Iterator<String> keys = response.keys();
 
-                                String date = cases.getString("date");
+                            while (keys.hasNext()) {
+                                String key = keys.next(); //state name
+                                StringBuilder value_all = new StringBuilder();
+                                StringBuilder key1_all = new StringBuilder();
 
-                                String total_confirmed = cases.getString("totalconfirmed");
-                                String total_recovered = cases.getString("totalrecovered");
-                                String total_deceased = cases.getString("totaldeceased");
+                                JSONObject district = response.getJSONObject(key).getJSONObject("districtData");
+                                Iterator<String> keys1 = district.keys();
 
+                                while (keys1.hasNext()) {
+                                    String key1 = keys1.next(); //district name
 
-                                String daily_confirmed = cases.getString("dailyconfirmed");
-                                String daily_recovered = cases.getString("dailyrecovered");
-                                String daily_deceased = cases.getString("dailydeceased");
+                                    JSONObject confirmed = district.getJSONObject(key1);
 
-                                stateList.add(new DateWiseItem(date,total_confirmed,total_recovered,
-                                        total_deceased,daily_confirmed,daily_recovered,daily_deceased));
+                                    String value = confirmed.getString("confirmed"); //cases confirmed
+
+                                    key1_all.append("\n").append(key1).append("\n");
+                                    value_all.append("\n").append(value).append("\n");
+                                }
+                                districtList.add(new DistrictItem(key, key1_all.toString(), value_all.toString()));
                             }
 
-                            mAdapter=new DateWiseAdapter(DateWiseActivity.this,stateList);
+                            mAdapter = new DistrictAdapter(DistrictActivity.this, districtList);
                             mRecyclerView.setAdapter(mAdapter);
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -97,8 +102,8 @@ public class DateWiseActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater  =getMenuInflater();
-        inflater.inflate(R.menu.search_menu,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
@@ -122,6 +127,4 @@ public class DateWiseActivity extends AppCompatActivity {
 
         return true;
     }
-
-
 }

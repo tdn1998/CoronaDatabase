@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker;
+package com.darkndev.coronatracker;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.easyapps.coronatracker.fragments.GlobalFragment;
-import com.easyapps.coronatracker.fragments.IndiaFragment;
+import com.darkndev.coronatracker.fragments.GlobalFragment;
+import com.darkndev.coronatracker.fragments.IndiaFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("COVID-19 Database")
-                    .setMessage("Corona Virus status all over world.")
+                    .setMessage("Corona Virus status all over world.\n\nDeveloped By DarkN'Dev")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

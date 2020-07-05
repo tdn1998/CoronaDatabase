@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker.district_wise;
+package com.darkndev.coronatracker.district_wise;
 
 public class DistrictItem {
     private String mText1;

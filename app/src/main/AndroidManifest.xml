@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.easyapps.coronatracker">
+    package="com.darkndev.coronatracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -19,18 +19,18 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity
-            android:name=".country_wise.CountryActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.darkndev.coronatracker.country_wise.CountryActivity"
+            android:parentActivityName="com.darkndev.coronatracker.MainActivity" />
         <activity
-            android:name=".district_wise.DistrictActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.darkndev.coronatracker.district_wise.DistrictActivity"
+            android:parentActivityName="com.darkndev.coronatracker.MainActivity" />
         <activity
-            android:name=".state_wise.StateWiseActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.darkndev.coronatracker.state_wise.StateWiseActivity"
+            android:parentActivityName="com.darkndev.coronatracker.MainActivity" />
         <activity
-            android:name=".date_wise.DateWiseActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity">
+            android:name="com.darkndev.coronatracker.date_wise.DateWiseActivity"
+            android:parentActivityName="com.darkndev.coronatracker.MainActivity" />
+        <activity android:name="com.darkndev.coronatracker.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

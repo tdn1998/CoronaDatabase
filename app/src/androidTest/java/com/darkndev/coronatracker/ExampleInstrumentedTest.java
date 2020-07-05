@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker;
+package com.darkndev.coronatracker;
 
 import android.content.Context;
 

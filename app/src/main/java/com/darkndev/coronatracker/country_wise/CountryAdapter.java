@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker.country_wise;
+package com.darkndev.coronatracker.country_wise;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.easyapps.coronatracker.R;
+import com.darkndev.coronatracker.R;
 
 import java.util.ArrayList;
 

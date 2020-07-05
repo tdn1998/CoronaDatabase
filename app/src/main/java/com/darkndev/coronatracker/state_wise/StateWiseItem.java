@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker.state_wise;
+package com.darkndev.coronatracker.state_wise;
 
 public class StateWiseItem {
     private String mText1;

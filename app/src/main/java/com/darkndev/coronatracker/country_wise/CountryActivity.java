@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker.state_wise;
+package com.darkndev.coronatracker.country_wise;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,76 +16,80 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.easyapps.coronatracker.R;
-import com.easyapps.coronatracker.VolleySingleton;
+import com.darkndev.coronatracker.R;
+import com.darkndev.coronatracker.VolleySingleton;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
-public class StateWiseActivity extends AppCompatActivity {
+public class CountryActivity extends AppCompatActivity {
 
     private RequestQueue mQueue;
 
     private RecyclerView mRecyclerView;
-    private StateWiseAdapter mAdapter;
-    private ArrayList<StateWiseItem> stateList;
+    private CountryAdapter mAdapter;
+    private ArrayList<CountryItem> countryList;
+    //private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_state_wise);
+        setContentView(R.layout.activity_country);
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("State Wise Data");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Country Wise Data");
+
+        /*dialog = new ProgressDialog(CountryActivity.this, R.style.AppCompatAlertDialogStyle);
+        dialog.setTitle("Please Wait");
+        dialog.setMessage("Getting Data...");
+        dialog.show();*/
 
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        stateList = new ArrayList<>();
+        countryList = new ArrayList<>();
 
         mQueue = VolleySingleton.getInstance(this).getRequestQueue();
         jsonParse();
     }
 
     private void jsonParse() {
-        String url = "https://api.covid19india.org/data.json";
+        String url = "https://pomber.github.io/covid19/timeseries.json";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
                         try {
-                            JSONArray jsonArray = response.getJSONArray("statewise");
-                            for (int i = 1; i < jsonArray.length(); i++) {
-                                JSONObject cases = jsonArray.getJSONObject(i);
+                            Iterator<String> keys = response.keys();
 
-                                String state = cases.getString("state");
-                                String date = cases.getString("lastupdatedtime");
+                            while (keys.hasNext()) {
+                                String key = keys.next(); //state name
 
-                                String total_confirmed = cases.getString("confirmed");
-                                String total_active = cases.getString("active");
-                                String total_recovered = cases.getString("recovered");
-                                String total_deceased = cases.getString("deaths");
+                                JSONArray country = response.getJSONArray(key);
 
+                                JSONObject obj = response.getJSONArray(key).getJSONObject(country.length() - 1);
 
-                                String daily_confirmed = cases.getString("deltaconfirmed");
-                                String daily_recovered = cases.getString("deltarecovered");
-                                String daily_deceased = cases.getString("deltadeaths");
+                                String confirmed = obj.getString("confirmed");
+                                String recovered = obj.getString("recovered");
+                                String deaths = obj.getString("deaths");
+                                String date = obj.getString("date");
 
-                                stateList.add(new StateWiseItem(state,date,total_confirmed,total_active,
-                                        total_recovered,total_deceased,daily_confirmed,daily_recovered,daily_deceased));
+                                countryList.add(new CountryItem(key, date, confirmed, recovered, deaths));
                             }
 
-                            mAdapter=new StateWiseAdapter(StateWiseActivity.this,stateList);
+                            mAdapter = new CountryAdapter(CountryActivity.this, countryList);
                             mRecyclerView.setAdapter(mAdapter);
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -95,12 +99,13 @@ public class StateWiseActivity extends AppCompatActivity {
         });
 
         mQueue.add(request);
+        //dialog.dismiss();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater  =getMenuInflater();
-        inflater.inflate(R.menu.search_menu,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
@@ -124,5 +129,4 @@ public class StateWiseActivity extends AppCompatActivity {
 
         return true;
     }
-
 }

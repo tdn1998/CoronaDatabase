@@ -1,4 +1,4 @@
-package com.easyapps.coronatracker.fragments;
+package com.darkndev.coronatracker.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.easyapps.coronatracker.R;
-import com.easyapps.coronatracker.VolleySingleton;
-import com.easyapps.coronatracker.country_wise.CountryActivity;
+import com.darkndev.coronatracker.R;
+import com.darkndev.coronatracker.VolleySingleton;
+import com.darkndev.coronatracker.country_wise.CountryActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
