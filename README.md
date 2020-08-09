@@ -1,4 +1,4 @@
-# CoronaTracker
+# CoronaDatabase
 
 API's From: -
 
