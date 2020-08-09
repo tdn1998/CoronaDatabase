@@ -1,6 +1,8 @@
 # CoronaDatabase
 
-API's From: -
+Android App that gives data about Corona Affected people all over the world.
+
+API's Used: -
 
 https://api.covid19india.org/
 
